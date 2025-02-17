@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { join } from 'path';
 import config from './config/main';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
@@ -11,7 +12,7 @@ import { UsersModule } from './modules/users/users.module';
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: 'src/schema.gql',
+      autoSchemaFile: join(process.cwd(), 'src/graphql/schema.gql'),
     }),
     ConfigModule.forRoot({
       isGlobal: true,
